@@ -16,7 +16,20 @@
 		<servlet-name>Controller</servlet-name>
 		<url-pattern>/controller</url-pattern>
 	</servlet-mapping>
+	<filter>
+		<display-name>CharsetFilter</display-name>
+		<filter-name>CharsetFilter</filter-name>
+		<filter-class>by.itacademy.matveenko.jd2.controller.filter.CharsetFilter</filter-class>
+		<init-param>
+			<param-name>characterEncoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharsetFilter</filter-name>
+		<url-pattern>/Controller</url-pattern>
+	</filter-mapping>
 	<listener>
       <listener-class>by.itacademy.matveenko.jd2.controller.listener.NewsManagementContextListener</listener-class>  
-  </listener>     
+    </listener>     
 </web-app>

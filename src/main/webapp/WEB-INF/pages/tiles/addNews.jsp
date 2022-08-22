@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +33,16 @@
 		<label>News Content:<br />
 		<p><textarea type="text" name="content" placeholder="Enter text of content in the field" value="" style="width: 670px; height: 140px;"></textarea></p></label>			
 		<br />					
-		<input type="submit" value="Save" />
+		<input type="submit" value="Save" />		
 </fieldset>	
 </form>
 </table>
+</div>
+<div class="cansel-button">
+		<form action="controller" method="post">
+		    <input type="hidden" name="command" value="go_to_news_list" />
+		    <input type="submit" value="Cansel" />
+		</form>
 </div>
 </body>
 </html>

@@ -1,13 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<fmt:setLocale value="${sessionScope.local}" />
+<fmt:setBundle basename="local.local" var="loc" />
+<fmt:message bundle="${loc}" key="local.title" var="title" />
+<fmt:message bundle="${loc}" key="local.localbutton.en" var="button_en"/>
+<fmt:message bundle="${loc}" key="local.localbutton.ru" var="button_ru"/>
 
 <div class="wrapper">
 	<div class="newstitle">News management</div>
-	<div class="local-link">
-		<div align="right">
-			<a href="">English</a>&nbsp;&nbsp;
-			<a href="">Russian</a><br /><br />
-		</div>
-		
+	<div class="local-link">	
+		<div align="right">	    
+			<a href="controller?command=go_to_local&local=en">English</a>&nbsp;&nbsp;
+			<a href="controller?command=go_to_local&local=ru">Russian</a><br /><br />
+		</div>		
 		<c:if test="${not (sessionScope.user_status eq 'active')}">
 			<div align="right">
 				<form action="controller" method="post">
@@ -24,8 +30,7 @@
 					<input type="submit" value="Sign In" /><br />
 				</form>
 			</div>
-		</c:if>
-			
+		</c:if>			
 		<c:if test="${sessionScope.user_status eq 'active'}">
 			<div align="right">
 			<center><font color="blue">${user.userName}</font>&nbsp;&nbsp;<font color="blue">${user.userSurname}</font></center>
@@ -34,7 +39,8 @@
 					<input type="submit" value="Sign Out" /><br />
 				</form>
 			</div>
-		</c:if>
-		
+		</c:if>		
 	</div>
 </div>
+</body>
+</html>
