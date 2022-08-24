@@ -7,7 +7,8 @@ import by.itacademy.matveenko.jd2.dao.connectionpool.ConnectionPoolException;
 import by.itacademy.matveenko.jd2.service.ServiceException;
 
 public interface IUserDao {	
-	User findUserByLoginAndPassword(String login, String password) throws DaoException;
+	User findUserByLoginAndPassword(String login, String hashPassword) throws DaoException;
+	User findUserByLogin(String login) throws DaoException;
 	boolean saveUser(User user) throws DaoException, ServiceException;
 	User findById(Integer id) throws SQLException, ConnectionPoolException, DaoException;
 }

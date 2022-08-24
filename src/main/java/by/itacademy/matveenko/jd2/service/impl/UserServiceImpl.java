@@ -4,6 +4,9 @@ import by.itacademy.matveenko.jd2.dao.IUserDao;
 import by.itacademy.matveenko.jd2.service.IUserService;
 import by.itacademy.matveenko.jd2.util.validation.UserDataValidation;
 import by.itacademy.matveenko.jd2.util.validation.ValidationProvider;
+
+import org.mindrot.jbcrypt.BCrypt;
+
 import by.itacademy.matveenko.jd2.bean.User;
 import by.itacademy.matveenko.jd2.dao.DaoException;
 import by.itacademy.matveenko.jd2.dao.DaoProvider;
@@ -16,12 +19,12 @@ public class UserServiceImpl implements IUserService{
 	
 	@Override
 	public User signIn(String login, String password) throws ServiceException {
-		if (!userDataValidation.checkAuthDataLogination(login,password)) {
+		if (!userDataValidation.checkAuthDataLogination(login, password)) {
 			throw new ServiceException("Invalid authorization data!");
    	 }
 		try {
-			User user = userDao.findUserByLoginAndPassword(login, password);			
-			if(user != null) {
+			User user = userDao.findUserByLogin(login);			
+			if((user != null) && (BCrypt.checkpw(password, user.getPassword())) && (login.equals(user.getLogin()))) {
 				return user;				
 				} else {
 					return null;
@@ -30,16 +33,22 @@ public class UserServiceImpl implements IUserService{
 				throw new ServiceException(e);
 			}
 		}
-		
+	
 	@Override
 	public boolean registration(User user) throws ServiceException  {
 		  if (!userDataValidation.checkAuthDataRegistration(user)) {
 			  throw new ServiceException("Invalid registration data!");
 	  }
-		  try {
-			   return userDao.saveUser(user);			  
+		  try {			  
+			  if((user != null)) {
+				  String hashPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+				  user.setPassword(hashPassword);	                    
+				  return userDao.saveUser(user);			
+					} else {
+						return false;
+					}			  			  
 		   }catch(DaoException e) {
 				throw new ServiceException(e);
 				}		  
-		  }
-	}
+	}	
+}

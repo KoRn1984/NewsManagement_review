@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+<fmt:setLocale value="${sessionScope.local}" />
+<fmt:setBundle basename="localization.local" var="loc" />    
+<fmt:message bundle="${loc}" key="local.loc.name.welcome" var="welcome" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +15,7 @@
 <link rel="stylesheet" type="text/css" href="styles/newsStyle.css">
 </head>
 <body>
-	<div class="page">
-	
+	<div class="page">	    
 		<div class="header">
 			<c:import url="/WEB-INF/pages/tiles/header.jsp" />
 		</div>
@@ -18,7 +23,7 @@
 		<div class="base-layout-wrapper">
 			<div class="menu">
 				<c:if test="${not (sessionScope.user_status eq 'active')}">				
-				    <center><h1>Welcome to the news portal!</h1></center>
+				    <center><h1>${welcome}!</h1></center>
 					<%-- <c:import url=""></c:import> --%>
 				</c:if>
 				<c:if test="${sessionScope.user_status eq 'active'}">

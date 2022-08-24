@@ -18,6 +18,7 @@ public class GoToAddNewsPage implements Command {
 		HttpSession getSession = request.getSession(true);		
 		getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);		
 		getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.ADD_NEWS);
-		request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);		
+		request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_add_news_page");
+		request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
 	}
 }

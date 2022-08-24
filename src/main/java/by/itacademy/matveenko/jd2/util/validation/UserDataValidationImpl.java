@@ -17,8 +17,7 @@ public class UserDataValidationImpl implements UserDataValidation {
 		if (password.isEmpty() || login.isEmpty()) {
             return false;
         }
-        if (Pattern.matches(LOGIN_PATTERN, login)
-                && Pattern.matches(PASSWORD_PATTERN, password)) {
+        if (Pattern.matches(LOGIN_PATTERN, login) && Pattern.matches(PASSWORD_PATTERN, password)) {
             return true;
         }
         return false;
@@ -39,8 +38,7 @@ public class UserDataValidationImpl implements UserDataValidation {
                 && Pattern.matches(PASSWORD_PATTERN, password)
                 && Pattern.matches(NAME_PATTERN, userName)
                 && Pattern.matches(SURNAME_PATTERN, userSurname)
-                && Pattern.matches(EMAIL_PATTERN, email)
-                ) {
+                && Pattern.matches(EMAIL_PATTERN, email)) {
             return true;
         }
         return false;

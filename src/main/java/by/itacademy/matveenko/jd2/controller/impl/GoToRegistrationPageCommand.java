@@ -18,6 +18,7 @@ public class GoToRegistrationPageCommand implements Command {
 		HttpSession getSession = request.getSession(true);
 		request.setAttribute(AttributsName.SHOW_NEWS, AttributsName.DO_NOT_SHOW_NEWS);
 		getSession.setAttribute(AttributsName.REGISTER_USER, ConnectorStatus.NOT_REGISTERED);
+		request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_registration_page");
 		request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);		
 	}
 }

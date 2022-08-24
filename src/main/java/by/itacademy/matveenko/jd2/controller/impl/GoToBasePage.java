@@ -26,14 +26,16 @@ public class GoToBasePage implements Command{
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<News> latestNews;
-		
+		int countNews = 5;
 		try {
-			latestNews = newsService.latestList(5);			
-			request.setAttribute(AttributsName.NEWS, latestNews);			
+			latestNews = newsService.latestList(countNews);			
+			request.setAttribute(AttributsName.NEWS, latestNews);
+			request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_base_page");
 		} catch (ServiceException e) {			
 			log.error(e);        	
 		} finally {
 			request.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.NOT_ACTIVE);
+			request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_base_page");
 			request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
 		}
 	}

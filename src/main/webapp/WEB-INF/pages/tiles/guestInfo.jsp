@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.local}" />
+<fmt:setBundle basename="localization.local" var="loc" />    
+<fmt:message bundle="${loc}" key="local.loc.name.newses" var="newses" />
+<fmt:message bundle="${loc}" key="local.loc.name.latestNews" var="latest_news" />
+<fmt:message bundle="${loc}" key="local.loc.name.noNews" var="no_news" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,8 +15,8 @@
 <title>Guest Info</title>
 </head>
 <body>
-<div class="body-title">
-	<a href="controller?command=go_to_news_list">News >></a> Latest News
+<div class="body-title">    
+	<a href="controller?command=go_to_news_list">${newses} >></a> ${latest_news}
 </div>
 <form action="command.do?method=delete" method="post">
 	<c:forEach var="news" items="${requestScope.news}">
@@ -33,7 +40,7 @@
 	<div class="no-news">
 		<c:if test="${sessionScope.news eq null}">
 		<font color="red">
-        No news for unregistered user!
+        ${no_news}!
         </font>
 	    </c:if>
 	</div>

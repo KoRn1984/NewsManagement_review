@@ -20,6 +20,7 @@ public class GoToEditNewsPage implements Command {
 		getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);		
 		getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.EDIT_NEWS);
 		getSession.setAttribute(AttributsName.NEWS_ID, request.getParameter(NewsParameterName.JSP_ID_NEWS));
+		request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_edit_news_page");
 		request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);		
 	}
 }

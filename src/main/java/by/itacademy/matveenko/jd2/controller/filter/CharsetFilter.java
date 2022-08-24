@@ -11,7 +11,6 @@ import jakarta.servlet.ServletRequest;
 import jakarta.servlet.ServletResponse;
 
 public class CharsetFilter implements Filter {
-	
 	private String encoding;
 	private ServletContext context;
 
@@ -25,7 +24,7 @@ public class CharsetFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding(encoding);
 		response.setCharacterEncoding(encoding);
-		context.log("Charset was set.");		
+		context.log("Charset was set!");		
 		chain.doFilter(request, response);
 	}
 	

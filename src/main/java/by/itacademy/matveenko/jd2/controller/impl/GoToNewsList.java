@@ -21,8 +21,7 @@ public class GoToNewsList implements Command {
 	
 	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
 	private static final Logger log = LogManager.getRootLogger();
-	private static final String NEWS_LIST = "newsList";
-		
+			
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<News> newsList;
@@ -32,7 +31,8 @@ public class GoToNewsList implements Command {
 		try {
 			newsList = newsService.newsList(pageNumber, pageSize);
 			request.setAttribute(AttributsName.NEWS, newsList);
-			request.setAttribute(AttributsName.PRESENTATION, NEWS_LIST);
+			request.setAttribute(AttributsName.PRESENTATION, AttributsName.NEWS_LIST);
+			request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_news_list");
 			request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);			
 		} catch (ServiceException e) {
 			log.error(e);

@@ -6,6 +6,7 @@ public class AttributsName {
 	public static final String REGISTER_USER = "register_user";
 	public static final String ROLE = "role";	
 	public static final String NEWS = "news";
+	public static final String NEWS_LIST = "newsList";
 	public static final String NEWS_ID = "newsId";
 	public static final String SHOW_NEWS = "showNews";
 	public static final String DO_NOT_SHOW_NEWS = "not_show";
@@ -17,4 +18,6 @@ public class AttributsName {
 	public static final String ADD_NEWS = "addNews";
 	public static final String EDIT_NEWS = "editNews";
 	public static final String DELETE_NEWS = "deleteNews";
+	public static final String LOCAL = "local";
+	public static final String PAGE_URL = "url";
 }
