@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import by.itacademy.matveenko.jd2.controller.impl.DoAddNews;
+import by.itacademy.matveenko.jd2.controller.impl.DoChangeLocal;
 import by.itacademy.matveenko.jd2.controller.impl.DoDeleteNews;
 import by.itacademy.matveenko.jd2.controller.impl.DoEditNews;
 import by.itacademy.matveenko.jd2.controller.impl.DoRegistration;
@@ -32,6 +33,7 @@ public class CommandProvider {
         commands.put(CommandName.GO_TO_EDIT_NEWS_PAGE, new GoToEditNewsPage());
         commands.put(CommandName.DO_EDIT_NEWS, new DoEditNews());
         commands.put(CommandName.DO_DELETE_NEWS, new DoDeleteNews());
+        commands.put(CommandName.DO_CHANGE_LOCAL, new DoChangeLocal());      
 	}
 		
 	public Command getCommand(String name) {

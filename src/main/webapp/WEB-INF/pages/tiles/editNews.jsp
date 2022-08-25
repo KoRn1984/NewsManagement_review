@@ -32,7 +32,7 @@
 </head>
 <body>
 <div class="body-title">
-<a href="controller?command=go_to_news_list">${newses} >> </a>${news_view}
+<a href="controller?command=go_to_news_list&local=${local}">${newses} >> </a>${news_view}
 </div>
 <div class="add-table-margin">
 <table class="news_text_format">
@@ -55,8 +55,9 @@
 <div class="cancel-button">
 		<form action="controller" method="post">
 		     <input type="hidden" name="command" value="go_to_news_list" />
+		     <input type="hidden" name="local" value="${local}" />	     
 		     <input type="submit" value="${cancel}" />
-		</form>
+		</form>		
 </div>
 </body>
 </html>

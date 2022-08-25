@@ -1,10 +1,14 @@
 package by.itacademy.matveenko.jd2.bean;
 
+import java.io.Serializable;
+
 import com.google.common.base.Objects;
 import by.itacademy.matveenko.jd2.bean.User;
 
 
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer id;
 	private String login;
     private String password;

@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="body-title">    
-	<a href="controller?command=go_to_news_list">${newses} >></a> ${latest_news}
+	<a href="controller?command=go_to_news_list&local=${local}">${newses} >></a> ${latest_news}
 </div>
 <form action="command.do?method=delete" method="post">
 	<c:forEach var="news" items="${requestScope.news}">

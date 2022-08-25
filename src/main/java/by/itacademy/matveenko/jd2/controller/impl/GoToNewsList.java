@@ -10,6 +10,7 @@ import by.itacademy.matveenko.jd2.bean.News;
 import by.itacademy.matveenko.jd2.controller.AttributsName;
 import by.itacademy.matveenko.jd2.controller.Command;
 import by.itacademy.matveenko.jd2.controller.JspPageName;
+import by.itacademy.matveenko.jd2.controller.PageUrl;
 import by.itacademy.matveenko.jd2.service.INewsService;
 import by.itacademy.matveenko.jd2.service.ServiceException;
 import by.itacademy.matveenko.jd2.service.ServiceProvider;
@@ -32,7 +33,8 @@ public class GoToNewsList implements Command {
 			newsList = newsService.newsList(pageNumber, pageSize);
 			request.setAttribute(AttributsName.NEWS, newsList);
 			request.setAttribute(AttributsName.PRESENTATION, AttributsName.NEWS_LIST);
-			request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_news_list");
+			request.getSession(true).setAttribute(AttributsName.LOCAL, request.getParameter(AttributsName.LOCAL));
+			request.getSession(true).setAttribute(AttributsName.PAGE_URL, PageUrl.NEWS_LIST_PAGE);
 			request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);			
 		} catch (ServiceException e) {
 			log.error(e);

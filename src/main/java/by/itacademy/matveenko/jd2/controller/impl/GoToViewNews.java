@@ -9,6 +9,7 @@ import by.itacademy.matveenko.jd2.bean.News;
 import by.itacademy.matveenko.jd2.controller.AttributsName;
 import by.itacademy.matveenko.jd2.controller.Command;
 import by.itacademy.matveenko.jd2.controller.JspPageName;
+import by.itacademy.matveenko.jd2.controller.PageUrl;
 import by.itacademy.matveenko.jd2.service.INewsService;
 import by.itacademy.matveenko.jd2.service.ServiceException;
 import by.itacademy.matveenko.jd2.service.ServiceProvider;
@@ -31,7 +32,10 @@ public class GoToViewNews implements Command {
 			news = newsService.findById(Integer.parseInt(id));
 			request.setAttribute(AttributsName.NEWS, news);		
 			request.setAttribute(AttributsName.PRESENTATION, AttributsName.VIEW_NEWS);
-			request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_view_news&id=" + id);
+			request.getSession(true).setAttribute(AttributsName.LOCAL, request.getParameter(AttributsName.LOCAL));
+			StringBuilder urlBuilder = new StringBuilder(PageUrl.VIEW_NEWS);
+			urlBuilder.append(id);
+			request.getSession(true).setAttribute(AttributsName.PAGE_URL, urlBuilder);
 			//System.out.println(request.getHeader("referer"));
 			request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);		
 		} catch (ServiceException e) {		

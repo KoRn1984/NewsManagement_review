@@ -30,6 +30,10 @@
 		<url-pattern>/Controller</url-pattern>
 	</filter-mapping>
 	<listener>
-      <listener-class>by.itacademy.matveenko.jd2.controller.listener.NewsManagementContextListener</listener-class>  
-    </listener>     
+        <listener-class>by.itacademy.matveenko.jd2.controller.listener.NewsManagementContextListener</listener-class>  
+    </listener>
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/pages/tiles/error.jsp</location>
+    </error-page>    
 </web-app>

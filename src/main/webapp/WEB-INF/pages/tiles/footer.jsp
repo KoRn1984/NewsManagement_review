@@ -12,7 +12,8 @@
 <meta charset="UTF-8">
 <title>Footer</title>
 </head>
-<body>    
+<body>
+<input type="hidden" name="local" value="${local}" />    
 <center>${copyright}.</center>
 </body>
 </html>

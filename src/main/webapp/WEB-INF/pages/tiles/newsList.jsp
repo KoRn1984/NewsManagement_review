@@ -10,25 +10,29 @@
 <fmt:message bundle="${loc}" key="local.loc.name.view" var="view" />
 <fmt:message bundle="${loc}" key="local.loc.name.delete" var="delete" />
 <fmt:message bundle="${loc}" key="local.loc.name.noNews" var="no_news" />
+<fmt:message bundle="${loc}" key="local.loc.name.regMessage" var="reg_message" />
+<fmt:message bundle="${loc}" key="local.loc.name.saveMessage" var="save_message" />
+<fmt:message bundle="${loc}" key="local.loc.name.updateMessage" var="update_message" />
+<fmt:message bundle="${loc}" key="local.loc.name.deleteMessage" var="delete_message" />
 
 <div class="body-title">
-	<a href="controller?command=go_to_news_list">${newses} >> </a>${news_list}
+	<a href="controller?command=go_to_news_list&local=${local}">${newses} >> </a>${news_list}
 </div>
 <form action="controller" method="post">
     <c:if test="${sessionScope.register_user eq 'not_registered'}">
 		<c:import url="/WEB-INF/pages/tiles/registration.jsp" />
 	</c:if>		     
 	<c:if test="${sessionScope.register_user eq 'registered'}">
-		<center><font color="green">Registration completed successfully!</font></center>
+		<center><font color="green">${reg_message}!</font></center>
 	</c:if>				     
 	<c:if test="${sessionScope.addNews eq 'command_executed'}">
-	    <center><font color="blue">Data saved successfully!</font></center>
+	    <center><font color="blue">${save_message}!</font></center>
 	</c:if>
 	<c:if test="${sessionScope.editNews eq 'command_executed'}">
-	    <center><font color="orange">Data updated successfully!</font></center>
+	    <center><font color="orange">${update_message}!</font></center>
 	</c:if>
 	<c:if test="${sessionScope.deleteNews eq 'command_executed'}">
-	    <center><font color="grey">Data deleted successfully!</font></center>
+	    <center><font color="grey">${delete_message}!</font></center>
 	</c:if>	
 <form action="controller" method="post">
 	<c:forEach var="news" items="${requestScope.news}">
@@ -48,9 +52,9 @@
 				<div class="news-link-to-wrapper">
 					<div class="link-position">
 						<c:if test="${sessionScope.role eq 'admin'}">
-						      <a href="controller?command=go_to_edit_news_page&id=${news.id}">${edit}</a> 
+						      <a href="controller?command=go_to_edit_news_page&id=${news.id}&local=${local}">${edit}</a> 
 						</c:if>&nbsp;&nbsp;				
-						<a href="controller?command=go_to_view_news&id=${news.id}">${view}</a>   					    
+						<a href="controller?command=go_to_view_news&id=${news.id}&local=${local}">${view}</a>   					    
    					    <c:if test="${sessionScope.role eq 'admin'}">   					    
    					         <input type="checkbox" name="id" value="${news.id}" />
    					         <input type="hidden" name="command" value="do_delete_news" />

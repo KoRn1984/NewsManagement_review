@@ -35,6 +35,7 @@
 			${email}:<br/>
 			<input type="email" name="email" value="" required pattern="([A-zА-я])+([0-9\\-_\\+\\.])*([A-zА-я0-9\\-_\\+\\.])*@([A-zА-я])+([0-9\\-_\\+\\.])*([A-zА-я0-9\\-_\\+\\.])*[\\.]([A-zА-я])+" size=35 maxlength=30/><br/>
 			<br/>
+			<input type="hidden" name="local" value="${local}" />
 			<input class="button" type="submit" value="${register}" /><br/>
 		</form>
 </fieldset>
@@ -44,6 +45,7 @@
 <div class="cancel-button">
 		<form action="controller" method="post">
 		     <input type="hidden" name="command" value="go_to_base_page" />
+		     <input type="hidden" name="local" value="${local}" />
 		     <input type="submit" value="${cancel}" />
 		</form>
 </div>		

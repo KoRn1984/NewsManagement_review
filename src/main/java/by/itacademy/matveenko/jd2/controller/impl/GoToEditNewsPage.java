@@ -7,6 +7,7 @@ import by.itacademy.matveenko.jd2.controller.AttributsName;
 import by.itacademy.matveenko.jd2.controller.Command;
 import by.itacademy.matveenko.jd2.controller.JspPageName;
 import by.itacademy.matveenko.jd2.controller.NewsParameterName;
+import by.itacademy.matveenko.jd2.controller.PageUrl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,7 +21,8 @@ public class GoToEditNewsPage implements Command {
 		getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);		
 		getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.EDIT_NEWS);
 		getSession.setAttribute(AttributsName.NEWS_ID, request.getParameter(NewsParameterName.JSP_ID_NEWS));
-		request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_edit_news_page");
+		request.getSession(true).setAttribute(AttributsName.LOCAL, request.getParameter(AttributsName.LOCAL));
+		request.getSession(true).setAttribute(AttributsName.PAGE_URL, PageUrl.EDIT_NEWS_PAGE);
 		request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);		
 	}
 }

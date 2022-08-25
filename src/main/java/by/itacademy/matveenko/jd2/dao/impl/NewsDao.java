@@ -19,13 +19,15 @@ import by.itacademy.matveenko.jd2.dao.connectionpool.ConnectionPoolException;
 public class NewsDao implements INewsDao {
 	private final UserDao userDao = new UserDao();	
 
+	String selectNewsLatestList = "SELECT * FROM news ORDER BY date DESC LIMIT ";
 	@Override
 	public List<News> getLatestList(int pageSize) throws NewsDaoException  {
 		List<News> newsLatestList = new ArrayList<>();
-		int startSize = pageSize;
-		String selectNewsLatestList = "SELECT * FROM news ORDER BY date DESC LIMIT " + startSize;	 
+		int startSize = pageSize;		
+		StringBuilder strBuilder = new StringBuilder(selectNewsLatestList);
+		strBuilder.append(startSize);		
 	        try (Connection connection = ConnectionPool.getInstance().takeConnection();
-	        	PreparedStatement ps = connection.prepareStatement(selectNewsLatestList)) {
+	        	PreparedStatement ps = connection.prepareStatement(strBuilder.toString())) {
 	            try (ResultSet rs = ps.executeQuery()) {
 	                while (rs.next()) {	                	
 	    				News latestNews = new News.Builder()
@@ -45,13 +47,16 @@ public class NewsDao implements INewsDao {
 	        return newsLatestList;
 	 }				
 
+	String selectNewsList = "SELECT * FROM news ORDER BY date DESC LIMIT ";
 	@Override
 	public List<News> getNewsList(Integer pageNumber, Integer pageSize) throws NewsDaoException {
 		List<News> newsList = new ArrayList<>();
 		int startSize = (pageNumber - 1) * pageSize;
-		String selectNewsList = "SELECT * FROM news ORDER BY date DESC LIMIT " + startSize + "," + pageSize; 
+		StringBuilder strBuilder = new StringBuilder(selectNewsList);
+		strBuilder.append(startSize);
+		strBuilder.append(pageSize);		 
 	        try (Connection connection = ConnectionPool.getInstance().takeConnection();
-	        	PreparedStatement ps = connection.prepareStatement(selectNewsList)) {
+	        	PreparedStatement ps = connection.prepareStatement(strBuilder.toString())) {
 	            try (ResultSet rs = ps.executeQuery()) {
 	                while (rs.next()) {	                	
 	    				News news = new News.Builder()
