@@ -20,10 +20,6 @@ public class News implements Serializable {
 	public static class Builder {
 		private News newNews;
 
-		public Builder() {
-			this.newNews = new News();
-		}
-
 		public Builder withId(Integer id) {
 			newNews.setId(id);
 			return this;
@@ -52,6 +48,10 @@ public class News implements Serializable {
 		public Builder withAuthor(User author) {
 			newNews.setAuthor(author);
 			return this;
+		}
+		
+		public Builder() {
+			this.newNews = new News();
 		}
 
 		public News build() {

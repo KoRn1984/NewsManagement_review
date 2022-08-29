@@ -21,11 +21,7 @@ public class User implements Serializable {
     }
      
     public static class Builder {
-        private User newUser;
-
-        public Builder() {
-            this.newUser = new User();
-        }
+        private User newUser;        
         
         public Builder withId(Integer id) {
             newUser.setId(id);
@@ -57,6 +53,10 @@ public class User implements Serializable {
         public Builder withRole(UserRole role) {
             newUser.setRole(role);
             return this;
+        }
+        
+        public Builder() {
+            this.newUser = new User();
         }
 
         public User build() {

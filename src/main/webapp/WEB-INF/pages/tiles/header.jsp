@@ -17,9 +17,10 @@
 	<div class="newstitle">${news_management}</div>
 	<div class="local-link">	
 		<div align="right">
-		<input type="hidden" name="command" value="do_change_local" />	    
-			<a href="${sessionScope.url}&local=en">${en_button}</a>&nbsp;&nbsp;
-			<a href="${sessionScope.url}&local=ru">${ru_button}</a><br /><br />
+		<form action="controller" method="post">		    
+			<a href="controller?command=do_change_local&local=en">${en_button}</a>&nbsp;&nbsp;
+			<a href="controller?command=do_change_local&local=ru">${ru_button}</a><br /><br />
+		</form>
 		</div>		
 		<c:if test="${not (sessionScope.user_status eq 'active')}">
 			<div align="right">
@@ -34,7 +35,8 @@
 						</font> 
 					</c:if>
 					<input type="hidden" name="command" value="do_registration" />
-					<a href="controller?command=go_to_registration_page&local=${local}">${registration}</a>					
+					<a href="controller?command=go_to_registration_page&local=${local}">${registration}</a>
+					<input type="hidden" name="local" value="${local}" />			
 					<input type="submit" value="${sign_in}" /><br />
 				</form>
 			</div>

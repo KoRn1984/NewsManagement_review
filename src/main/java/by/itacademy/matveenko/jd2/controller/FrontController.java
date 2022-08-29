@@ -25,7 +25,6 @@ public class FrontController extends HttpServlet {
 	}
 	
 	protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//request.getSession(true).setAttribute(AttributsName.LOCAL, request.getParameter(AttributsName.LOCAL));
 		String commandName = request.getParameter(AttributsName.COMMAND_NAME);		
 		Command command = provider.getCommand(commandName);
 		command.execute(request, response);		

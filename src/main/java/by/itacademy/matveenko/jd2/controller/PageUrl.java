@@ -7,4 +7,5 @@ public class PageUrl {
     public static final String ADD_NEWS_PAGE = "controller?command=go_to_add_news_page";
     public static final String EDIT_NEWS_PAGE = "controller?command=go_to_edit_news_page&id=";
     public static final String VIEW_NEWS = "controller?command=go_to_view_news&id=";
+    public static final String AMPERSAND_LOCAL = "&local=";
 }

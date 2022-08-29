@@ -8,6 +8,7 @@ import by.itacademy.matveenko.jd2.dao.INewsDao;
 import by.itacademy.matveenko.jd2.dao.NewsDaoException;
 import by.itacademy.matveenko.jd2.service.INewsService;
 import by.itacademy.matveenko.jd2.service.ServiceException;
+import by.itacademy.matveenko.jd2.util.validation.NewsDataValidation;
 
 public class NewsServiceImpl implements INewsService{
 	private final INewsDao newsDao = DaoProvider.getInstance().getNewsDao();
@@ -42,7 +43,16 @@ public class NewsServiceImpl implements INewsService{
 	@Override
 	public boolean save(News news) throws ServiceException {
 		try {
-			if (newsDao.addNews(news) == 0) {
+			NewsDataValidation.ValidBuilder valid = new NewsDataValidation.ValidBuilder();			
+			NewsDataValidation validNewsData = valid.titleValid(news.getTitle())
+					.briefValid(news.getBrief())
+					.contentValid(news.getContent())
+					.authorValid(news.getAuthor())
+					.dateValid(news.getDate())
+					.build();
+			if(!validNewsData.getDataValid().isEmpty()) {
+				throw new ServiceException("The entered news data is not valid!");
+			} else if (newsDao.addNews(news) == 0) {
 				return false;
 			}
 			return true;
@@ -54,7 +64,16 @@ public class NewsServiceImpl implements INewsService{
 	@Override
 	public boolean update(News news) throws ServiceException {
 		try {
-			if (!(newsDao.updateNews(news))) {
+			NewsDataValidation.ValidBuilder valid = new NewsDataValidation.ValidBuilder();			
+			NewsDataValidation validNewsData = valid.titleValid(news.getTitle())
+					.briefValid(news.getBrief())
+					.contentValid(news.getContent())
+					.authorValid(news.getAuthor())
+					.dateValid(news.getDate())
+					.build();
+			if(!validNewsData.getDataValid().isEmpty()) {
+				throw new ServiceException("The entered news data is not valid!");
+			} else if (!(newsDao.updateNews(news))) {
 				return false;
 			}
 			return true;

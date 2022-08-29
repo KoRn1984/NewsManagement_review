@@ -18,26 +18,30 @@ import by.itacademy.matveenko.jd2.controller.PageUrl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class GoToBasePage implements Command{
 	
 	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
 	private static final Logger log = LogManager.getRootLogger();
+	private static final int COUNT_NEWS = 5;
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String local = request.getParameter(AttributsName.LOCAL);
 		List<News> latestNews;
-		int countNews = 5;
-		try {
-			latestNews = newsService.latestList(countNews);			
-			request.setAttribute(AttributsName.NEWS, latestNews);
-			request.getSession(true).setAttribute(AttributsName.LOCAL, request.getParameter(AttributsName.LOCAL));
-			request.getSession(true).setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
+		HttpSession getSession = request.getSession(true);
+		try {			
+			getSession.setAttribute(AttributsName.LOCAL, local);
+			getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
+			latestNews = newsService.latestList(COUNT_NEWS);			
+			request.setAttribute(AttributsName.NEWS, latestNews);			
 		} catch (ServiceException e) {			
-			log.error(e);        	
+			log.error(e);
+			response.sendRedirect(JspPageName.ERROR_PAGE);
 		} finally {
 			request.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.NOT_ACTIVE);
-			request.getSession(true).setAttribute(AttributsName.PAGE_URL, "controller?command=go_to_base_page");
+			getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
 			request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
 		}
 	}

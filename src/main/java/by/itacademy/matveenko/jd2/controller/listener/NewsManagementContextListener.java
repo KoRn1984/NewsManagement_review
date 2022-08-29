@@ -14,16 +14,18 @@ public class NewsManagementContextListener implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {
 		try {
 			ConnectionPool.getInstance().initPoolData();
-		} catch (ConnectionPoolException e) {//xml настроить переход на error page
+		} catch (ConnectionPoolException e) {
 			log.error(e);
+			throw new RuntimeException(e);
 		} 
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
 		try {
 			ConnectionPool.getInstance().dispose();
-		} catch (ConnectionPoolException e) {//xml настроить переход на error page
+		} catch (ConnectionPoolException e) {
 			log.error(e);
+			throw new RuntimeException(e);
 		}
 	}
 }

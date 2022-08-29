@@ -68,6 +68,7 @@
 	<form action="controller" method="post">
 		<input type="hidden" name="command" value="do_delete_news" />
 		<input type="hidden" name="id" value="${news.id}" />
+		<input type="hidden" name="local" value="${local}" />
 		<input type="submit" value="${delete}" />
 	</form>
 </div>

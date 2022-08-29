@@ -5,7 +5,7 @@
 <fmt:setLocale value="${sessionScope.local}" />
 <fmt:setBundle basename="localization.local" var="loc" />    
 <fmt:message bundle="${loc}" key="local.loc.name.newses" var="newses" />
-<fmt:message bundle="${loc}" key="local.loc.name.newsView" var="news_view" />
+<fmt:message bundle="${loc}" key="local.loc.name.editNews" var="edit_news" />
 <fmt:message bundle="${loc}" key="local.loc.name.enterText" var="enter_text" />
 <fmt:message bundle="${loc}" key="local.loc.name.title" var="title" />
 <fmt:message bundle="${loc}" key="local.loc.name.brief" var="brief" />
@@ -32,7 +32,7 @@
 </head>
 <body>
 <div class="body-title">
-<a href="controller?command=go_to_news_list&local=${local}">${newses} >> </a>${news_view}
+<a href="controller?command=go_to_news_list&local=${local}">${newses} >> </a>${edit_news}
 </div>
 <div class="add-table-margin">
 <table class="news_text_format">
@@ -45,7 +45,13 @@
         <p><textarea type="text" name="brief" placeholder="Enter text of brief in the field" value="" style="width: 670px; height: 60px;"></textarea></p></label>				
 		<label>${content}:<br />
 		<p><textarea type="text" name="content" placeholder="Enter text of content in the field" value="" style="width: 670px; height: 140px;"></textarea></p></label>	
-		<br />					
+		<br />
+		<c:if test="${not (param.EditNewsError eq null)}">					
+			<font color="red">
+				<c:out value="${param.EditNewsError}" />
+			</font>
+		</c:if><br />		
+		<input type="hidden" name="local" value="${local}" />				
 		<input type="submit" value="${save}" />
 </form>
 </fieldset>
@@ -54,7 +60,8 @@
 <br /><br />
 <div class="cancel-button">
 		<form action="controller" method="post">
-		     <input type="hidden" name="command" value="go_to_news_list" />
+		     <input type="hidden" name="command" value="go_to_view_news" />
+		     <input type="hidden" name="id" value="${news.id}" />	    
 		     <input type="hidden" name="local" value="${local}" />	     
 		     <input type="submit" value="${cancel}" />
 		</form>		

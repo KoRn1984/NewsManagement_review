@@ -9,6 +9,7 @@ import by.itacademy.matveenko.jd2.controller.AttributsName;
 import by.itacademy.matveenko.jd2.controller.Command;
 import by.itacademy.matveenko.jd2.controller.JspPageName;
 import by.itacademy.matveenko.jd2.controller.NewsParameterName;
+import by.itacademy.matveenko.jd2.controller.PageUrl;
 import by.itacademy.matveenko.jd2.service.INewsService;
 import by.itacademy.matveenko.jd2.service.ServiceException;
 import by.itacademy.matveenko.jd2.service.ServiceProvider;
@@ -25,14 +26,17 @@ public class DoDeleteNews implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		    String[] idNewses = request.getParameterValues(NewsParameterName.JSP_ID_NEWS);		
-			
-		    HttpSession getSession = request.getSession(true);			
-			
+		    String local = request.getParameter(AttributsName.LOCAL);
+			HttpSession getSession = request.getSession(true);
+						
 			try {				
 				if (newsService.deleteNewsesByIds(idNewses)) {			
 					getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);					
 					getSession.setAttribute(AttributsName.DELETE_NEWS, AttributsName.COMMAND_EXECUTED);
-					response.sendRedirect("controller?command=go_to_news_list");					
+					StringBuilder urlForRedirect = new StringBuilder(PageUrl.NEWS_LIST_PAGE);
+					urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
+					urlForRedirect.append(local);
+					response.sendRedirect(urlForRedirect.toString());				
 				} else {
 					response.sendRedirect(JspPageName.ERROR_PAGE);
 				}

@@ -34,7 +34,12 @@
 			<input type="text" name="surname" value="" required pattern="^([А-Я]{1}[а-яё]{1,23}|[A-Z]{1}[a-z]{1,23})$" size=35 maxlength=30/><br/>
 			${email}:<br/>
 			<input type="email" name="email" value="" required pattern="([A-zА-я])+([0-9\\-_\\+\\.])*([A-zА-я0-9\\-_\\+\\.])*@([A-zА-я])+([0-9\\-_\\+\\.])*([A-zА-я0-9\\-_\\+\\.])*[\\.]([A-zА-я])+" size=35 maxlength=30/><br/>
-			<br/>
+			<br />
+			<c:if test="${not (param.RegistrationError eq null)}">					
+				<font color="red">
+					<c:out value="${param.RegistrationError}" />
+				</font> 
+			</c:if><br />
 			<input type="hidden" name="local" value="${local}" />
 			<input class="button" type="submit" value="${register}" /><br/>
 		</form>

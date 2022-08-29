@@ -13,10 +13,12 @@ import jakarta.servlet.ServletResponse;
 public class CharsetFilter implements Filter {
 	private String encoding;
 	private ServletContext context;
+	private static final String CHARACTER_ENCODING = "characterEncoding";
+	private static final String CHARSET_WAS_SET = "Charset was set!";
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		encoding = filterConfig.getInitParameter("characterEncoding");
+		encoding = filterConfig.getInitParameter(CHARACTER_ENCODING);
 		context = filterConfig.getServletContext();
 	}
 
@@ -24,7 +26,7 @@ public class CharsetFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding(encoding);
 		response.setCharacterEncoding(encoding);
-		context.log("Charset was set!");		
+		context.log(CHARSET_WAS_SET);	
 		chain.doFilter(request, response);
 	}
 	

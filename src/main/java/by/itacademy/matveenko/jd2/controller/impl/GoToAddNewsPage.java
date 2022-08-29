@@ -12,15 +12,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-public class GoToAddNewsPage implements Command {	
-	
+public class GoToAddNewsPage implements Command {
+		
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		HttpSession getSession = request.getSession(true);		
+	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String local = request.getParameter(AttributsName.LOCAL);
+		HttpSession getSession = request.getSession(true);
+		getSession.setAttribute(AttributsName.LOCAL, local);
+		getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.ADD_NEWS_PAGE);
 		getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);		
-		getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.ADD_NEWS);
-		request.getSession(true).setAttribute(AttributsName.LOCAL, request.getParameter(AttributsName.LOCAL));
-		request.getSession(true).setAttribute(AttributsName.PAGE_URL, PageUrl.ADD_NEWS_PAGE);
+		getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.ADD_NEWS);		
 		request.getRequestDispatcher(JspPageName.BASELAYOUT_PAGE).forward(request, response);
+		getSession.removeAttribute(AttributsName.NEWS_COMMANDS_NAME);	
 	}
 }

@@ -4,12 +4,12 @@ import java.util.ResourceBundle;
 import by.itacademy.matveenko.jd2.dao.connectionpool.DBResourceManager;
 
 public final class DBResourceManager {
-    
-	private final static DBResourceManager instance = new DBResourceManager();
+	private static final String DATABASE_NAME = "db";    
+	private static final DBResourceManager instance = new DBResourceManager();
     
     private DBResourceManager(){}
     
-    private ResourceBundle bundle = ResourceBundle.getBundle("db");
+    private ResourceBundle bundle = ResourceBundle.getBundle(DATABASE_NAME);
 
     public static DBResourceManager getInstance() {
         return instance;

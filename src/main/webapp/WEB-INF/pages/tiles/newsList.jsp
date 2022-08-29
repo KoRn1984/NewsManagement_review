@@ -69,6 +69,7 @@
 		<div class="delete-button-position">
 			<html:submit>
 				<bean:message key="locale.newslink.deletebutton" />
+				<input type="hidden" name="local" value="${local}" />
 				<input type="submit" value="${delete}" />
 			</html:submit>		                
 		</div>
