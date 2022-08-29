@@ -15,49 +15,7 @@ public class News implements Serializable {
 	private User author;
 	
 	public News() {
-	}
-
-	public static class Builder {
-		private News newNews;
-
-		public Builder withId(Integer id) {
-			newNews.setId(id);
-			return this;
-		}
-
-		public Builder withTitle(String title) {
-			newNews.setTitle(title);
-			return this;
-		}
-
-		public Builder withBrief(String brief) {
-			newNews.setBrief(brief);
-			return this;
-		}
-
-		public Builder withContent(String content) {
-			newNews.setContent(content);
-			return this;
-		}
-
-		public Builder withDate(LocalDate date) {
-			newNews.setDate(date);
-			return this;
-		}
-
-		public Builder withAuthor(User author) {
-			newNews.setAuthor(author);
-			return this;
-		}
-		
-		public Builder() {
-			this.newNews = new News();
-		}
-
-		public News build() {
-			return newNews;
-		}
-	}
+	}	
 
 	public Integer getId() {
 		return id;
@@ -105,6 +63,48 @@ public class News implements Serializable {
 
 	public void setAuthor(User author) {
 		this.author = author;
+	}
+	
+	public static class Builder {
+		private News newNews;
+		
+		public Builder() {
+			this.newNews = new News();
+		}
+
+		public Builder withId(Integer id) {
+			newNews.setId(id);
+			return this;
+		}
+
+		public Builder withTitle(String title) {
+			newNews.setTitle(title);
+			return this;
+		}
+
+		public Builder withBrief(String brief) {
+			newNews.setBrief(brief);
+			return this;
+		}
+
+		public Builder withContent(String content) {
+			newNews.setContent(content);
+			return this;
+		}
+
+		public Builder withDate(LocalDate date) {
+			newNews.setDate(date);
+			return this;
+		}
+
+		public Builder withAuthor(User author) {
+			newNews.setAuthor(author);
+			return this;
+		}
+		
+		public News build() {
+			return newNews;
+		}
 	}
 	
 	@Override

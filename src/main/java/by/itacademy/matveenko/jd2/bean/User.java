@@ -18,52 +18,8 @@ public class User implements Serializable {
     private UserRole role;
 
     public User() {
-    }
+    }    
      
-    public static class Builder {
-        private User newUser;        
-        
-        public Builder withId(Integer id) {
-            newUser.setId(id);
-            return this;
-        }
-
-        public Builder withLogin(String login) {
-            newUser.setLogin(login);
-            return this;
-        }
-        public Builder withPassword(String password) {
-            newUser.setPassword(password);
-            return this;
-        }
-        public Builder withUserName(String userName) {
-            newUser.setUserName(userName);
-            return this;
-        }
-        public Builder withUserSurname(String userSurname) {
-            newUser.setUserSurname(userSurname);
-            return this;
-        }
-
-        public Builder withEmail(String email) {
-            newUser.setEmail(email);
-            return this;
-        }
-
-        public Builder withRole(UserRole role) {
-            newUser.setRole(role);
-            return this;
-        }
-        
-        public Builder() {
-            this.newUser = new User();
-        }
-
-        public User build() {
-            return newUser;
-        }
-    }
-    
     public Integer getId() {
         return id;
     }
@@ -118,6 +74,50 @@ public class User implements Serializable {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+    
+    public static class Builder {
+        private User newUser;
+        
+        public Builder() {
+            this.newUser = new User();
+        }
+        
+        public Builder withId(Integer id) {
+            newUser.setId(id);
+            return this;
+        }
+
+        public Builder withLogin(String login) {
+            newUser.setLogin(login);
+            return this;
+        }
+        public Builder withPassword(String password) {
+            newUser.setPassword(password);
+            return this;
+        }
+        public Builder withUserName(String userName) {
+            newUser.setUserName(userName);
+            return this;
+        }
+        public Builder withUserSurname(String userSurname) {
+            newUser.setUserSurname(userSurname);
+            return this;
+        }
+
+        public Builder withEmail(String email) {
+            newUser.setEmail(email);
+            return this;
+        }
+
+        public Builder withRole(UserRole role) {
+            newUser.setRole(role);
+            return this;
+        }
+        
+        public User build() {
+            return newUser;
+        }
     }
     
     @Override
