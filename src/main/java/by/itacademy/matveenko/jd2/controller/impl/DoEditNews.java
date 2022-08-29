@@ -25,7 +25,7 @@ public class DoEditNews implements Command {
 	
 	private final NewsServiceImpl newsService = new NewsServiceImpl();
 	private static final Logger log = LogManager.getRootLogger();
-	private static final String ERROR_EDIT_NEWS_MESSAGE = "&EditNewsError=Incorrect data entered!";
+	private static final String ERROR_EDIT_NEWS_MESSAGE = "&EditNewsError";
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

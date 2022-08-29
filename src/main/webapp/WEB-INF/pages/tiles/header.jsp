@@ -12,6 +12,7 @@
 <fmt:message bundle="${loc}" key="local.loc.name.enterLogin" var="enter_login" />
 <fmt:message bundle="${loc}" key="local.loc.name.enterPassword" var="enter_password" />
 <fmt:message bundle="${loc}" key="local.loc.name.registration" var="registration" />
+<fmt:message bundle="${loc}" key="local.loc.name.authenticationError" var="authentication_error" />
 
 <div class="wrapper">   
 	<div class="newstitle">${news_management}</div>
@@ -31,7 +32,7 @@
 					${enter_password}:<input type="password" name="password" value="" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{6,}"/><br />
 					<c:if test="${not (param.AuthenticationError eq null)}">					
 						<font color="red">
-						   <c:out value="${param.AuthenticationError}" />
+						   <c:out value="${authentication_error}" />
 						</font> 
 					</c:if>
 					<input type="hidden" name="command" value="do_registration" />

@@ -12,8 +12,7 @@ import by.itacademy.matveenko.jd2.dao.DaoException;
 import by.itacademy.matveenko.jd2.dao.DaoProvider;
 import by.itacademy.matveenko.jd2.service.ServiceException;
 
-public class UserServiceImpl implements IUserService{
-	
+public class UserServiceImpl implements IUserService{	
 	private final IUserDao userDao = DaoProvider.getInstance().getUserDao();
 	private final UserDataValidation userDataValidation = ValidationProvider. getInstance().getUserDataValidation();
 	

@@ -24,7 +24,7 @@ public class DoRegistration implements Command {
 	
 	private final IUserService service = ServiceProvider.getInstance().getUserService();
 	private static final Logger log = LogManager.getRootLogger();
-	private static final String ERROR_REGISTRATION_MESSAGE = "&RegistrationError=Incorrect data entered!";
+	private static final String ERROR_REGISTRATION_MESSAGE = "&RegistrationError";
 		
 		@Override
 		public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

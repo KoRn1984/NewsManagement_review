@@ -12,6 +12,7 @@
 <fmt:message bundle="${loc}" key="local.loc.name.content" var="content" />
 <fmt:message bundle="${loc}" key="local.loc.name.save" var="save" />
 <fmt:message bundle="${loc}" key="local.loc.name.cancel" var="cancel" />
+<fmt:message bundle="${loc}" key="local.loc.name.editNewsError" var="edit_news_error" />
 
 <!DOCTYPE html>
 <html>
@@ -48,7 +49,7 @@
 		<br />
 		<c:if test="${not (param.EditNewsError eq null)}">					
 			<font color="red">
-				<c:out value="${param.EditNewsError}" />
+				<c:out value="${edit_news_error}" />
 			</font>
 		</c:if><br />		
 		<input type="hidden" name="local" value="${local}" />				

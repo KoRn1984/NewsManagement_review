@@ -29,7 +29,7 @@ public class DoSignIn implements Command {
 	private final IUserService service = ServiceProvider.getInstance().getUserService();
 	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
 	private static final Logger log = LogManager.getRootLogger();
-	private static final String ERROR_SIGN_IN_MESSAGE = "&AuthenticationError=Wrong login or password!";
+	private static final String AUTHENTICATION_ERROR = "&AuthenticationError";
 	private static final int COUNT_NEWS = 5;
 	
 	@Override
@@ -53,7 +53,7 @@ public class DoSignIn implements Command {
 				getSession.setAttribute(AttributsName.ROLE, UserRole.GUEST);
 				request.setAttribute(AttributsName.NEWS, latestNews);				
 				StringBuilder urlForRedirect = new StringBuilder(PageUrl.BASE_PAGE);
-				urlForRedirect.append(ERROR_SIGN_IN_MESSAGE);
+				urlForRedirect.append(AUTHENTICATION_ERROR);
 				urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
 				urlForRedirect.append(local);
 				response.sendRedirect(urlForRedirect.toString());				

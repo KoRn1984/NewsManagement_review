@@ -19,6 +19,7 @@ import by.itacademy.matveenko.jd2.dao.connectionpool.ConnectionPoolException;
 
 public class NewsDao implements INewsDao {
 	private final UserDao userDao = new UserDao();
+	//private final IUserDao userDao = DaoProvider.getInstance().getUserDao();
 	private static final String DATE_PATTERN = "yyyy-MM-dd";
 	private static final String MESSAGE_EXCEPTION = "News not saved!";
 	

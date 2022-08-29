@@ -20,8 +20,7 @@ import jakarta.servlet.http.HttpSession;
 
 public class DoDeleteNews implements Command {
 	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
-	private static final Logger log = LogManager.getRootLogger();
-	
+	private static final Logger log = LogManager.getRootLogger();	
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

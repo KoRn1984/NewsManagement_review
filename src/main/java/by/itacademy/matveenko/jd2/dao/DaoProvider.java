@@ -9,8 +9,7 @@ public final class DaoProvider {
 	private final IUserDao userDao = new UserDao();
 	private final INewsDao newsDao = new NewsDao();	
 	
-	private DaoProvider() {
-	}	
+	private DaoProvider() {}
 	
 	public static DaoProvider getInstance() {
 		return instance;

@@ -12,6 +12,7 @@
 <fmt:message bundle="${loc}" key="local.loc.name.enterEmail" var="email" />
 <fmt:message bundle="${loc}" key="local.loc.name.register" var="register" />
 <fmt:message bundle="${loc}" key="local.loc.name.cancel" var="cancel" />
+<fmt:message bundle="${loc}" key="local.loc.name.registrationError" var="registration_error" />
 
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,7 @@
 			<br />
 			<c:if test="${not (param.RegistrationError eq null)}">					
 				<font color="red">
-					<c:out value="${param.RegistrationError}" />
+					<c:out value="${registration_error}" />
 				</font> 
 			</c:if><br />
 			<input type="hidden" name="local" value="${local}" />

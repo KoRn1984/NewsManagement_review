@@ -24,7 +24,7 @@ import jakarta.servlet.http.HttpSession;
 public class DoAddNews implements Command {
 	private final INewsService newsService = ServiceProvider.getInstance().getNewsService();
 	private static final Logger log = LogManager.getRootLogger();
-	private static final String ERROR_ADD_NEWS_MESSAGE = "&AddNewsError=Incorrect data entered!";
+	private static final String ERROR_ADD_NEWS_MESSAGE = "&AddNewsError";
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
