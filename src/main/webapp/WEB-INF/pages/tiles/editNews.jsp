@@ -41,11 +41,11 @@
 <form action="controller" method="post">
 		<input type="hidden" name="command" value="do_edit_news" />			              						
 		<label>${title}:<br />
-		<p><textarea type="text" name="title" placeholder="Enter text of title in the field" value="" style="width: 670px; height: 40px;"></textarea></p></label>
+		<p><textarea type="text" name="title" value="" style="width: 670px; height: 40px;">${news.title}</textarea></p></label>
 		<label>${brief}:<br />
-        <p><textarea type="text" name="brief" placeholder="Enter text of brief in the field" value="" style="width: 670px; height: 60px;"></textarea></p></label>				
+        <p><textarea type="text" name="brief" value="" style="width: 670px; height: 60px;">${news.brief}</textarea></p></label>				
 		<label>${content}:<br />
-		<p><textarea type="text" name="content" placeholder="Enter text of content in the field" value="" style="width: 670px; height: 140px;"></textarea></p></label>	
+		<p><textarea type="text" name="content" value="" style="width: 670px; height: 140px;">${news.content}</textarea></p></label>	
 		<br />
 		<c:if test="${not (param.EditNewsError eq null)}">					
 			<font color="red">
