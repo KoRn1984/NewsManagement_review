@@ -16,9 +16,7 @@ public class GoToAddNewsPage implements Command {
 		
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter(AttributsName.LOCAL);
 		HttpSession getSession = request.getSession(true);
-		getSession.setAttribute(AttributsName.LOCAL, local);
 		getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.ADD_NEWS_PAGE);
 		getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);		
 		getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.ADD_NEWS);		

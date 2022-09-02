@@ -26,13 +26,12 @@ public class GoToNewsList implements Command {
 			
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter(AttributsName.LOCAL);
+		HttpSession getSession = request.getSession(true);
 		List<News> newsList;
 		Integer pageNumber = 1;
-		Integer pageSize = 5;		
-		try {
-			HttpSession getSession = request.getSession(true);
-			getSession.setAttribute(AttributsName.LOCAL, local);
+		Integer pageSize = 5;
+		
+		try {			
 			getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.NEWS_LIST_PAGE);
 			newsList = newsService.newsList(pageNumber, pageSize);
 			request.setAttribute(AttributsName.NEWS, newsList);
@@ -44,4 +43,12 @@ public class GoToNewsList implements Command {
 			response.sendRedirect(JspPageName.ERROR_PAGE);
 		}		
 	}
+	
+	//protected void getNewsList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    //    String url = WebUtils.getPath(request);
+    //    Page<News> page = stuService.findAll(pageNo, pageSize);
+    //    page.setPath(url);
+    //    request.setAttribute("page", page );
+    //    request.getRequestDispatcher("/studentList.jsp").forward(request, response);
+   //   }
 }

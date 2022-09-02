@@ -36,15 +36,14 @@ public class DoSignIn implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String login = request.getParameter(UserParameterName.JSP_LOGIN_PARAM);
 		String password = request.getParameter(UserParameterName.JSP_PASSWORD_PARAM);
-		String local = request.getParameter(AttributsName.LOCAL);
-		List<News> latestNews;
+		HttpSession getSession = request.getSession(true);
+		List<News> latestNews;		
 		
 		if (!dataValidation(login, password)) {
             response.sendRedirect(JspPageName.INDEX_PAGE);
             return;
         }
-		try {
-			HttpSession getSession = request.getSession(true);
+		try {			
 			User user = service.signIn(login, password);
 			latestNews = newsService.latestList(COUNT_NEWS);
 			if (user == null) {				
@@ -54,8 +53,6 @@ public class DoSignIn implements Command {
 				request.setAttribute(AttributsName.NEWS, latestNews);				
 				StringBuilder urlForRedirect = new StringBuilder(PageUrl.BASE_PAGE);
 				urlForRedirect.append(AUTHENTICATION_ERROR);
-				urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
-				urlForRedirect.append(local);
 				response.sendRedirect(urlForRedirect.toString());				
 			} else if (!user.getRole().equals(UserRole.GUEST)) {
 				getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);
@@ -63,10 +60,7 @@ public class DoSignIn implements Command {
 				getSession.setAttribute(AttributsName.USER, user);
 				getSession.removeAttribute(AttributsName.REGISTER_USER);
 				request.setAttribute(AttributsName.NEWS, latestNews);
-				StringBuilder urlForRedirect = new StringBuilder(PageUrl.NEWS_LIST_PAGE);
-				urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
-				urlForRedirect.append(local);
-				response.sendRedirect(urlForRedirect.toString());
+				response.sendRedirect(PageUrl.NEWS_LIST_PAGE);
 			} 
 		} catch (ServiceException e) {
 			log.error(e);

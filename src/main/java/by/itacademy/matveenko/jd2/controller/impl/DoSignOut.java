@@ -15,12 +15,8 @@ public class DoSignOut implements Command {
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter(AttributsName.LOCAL);
 		HttpSession getSession = request.getSession(true);
 		getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.NOT_ACTIVE);
-		StringBuilder urlForRedirect = new StringBuilder(PageUrl.BASE_PAGE);
-		urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
-		urlForRedirect.append(local);
-		response.sendRedirect(urlForRedirect.toString());		
+		response.sendRedirect(PageUrl.BASE_PAGE);
 	}
 }

@@ -25,17 +25,13 @@ public class DoDeleteNews implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		    String[] idNewses = request.getParameterValues(NewsParameterName.JSP_ID_NEWS);		
-		    String local = request.getParameter(AttributsName.LOCAL);
-			HttpSession getSession = request.getSession(true);
+		    HttpSession getSession = request.getSession(true);
 						
 			try {				
 				if (newsService.deleteNewsesByIds(idNewses)) {			
 					getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);					
 					getSession.setAttribute(AttributsName.DELETE_NEWS, AttributsName.COMMAND_EXECUTED);
-					StringBuilder urlForRedirect = new StringBuilder(PageUrl.NEWS_LIST_PAGE);
-					urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
-					urlForRedirect.append(local);
-					response.sendRedirect(urlForRedirect.toString());				
+					response.sendRedirect(PageUrl.NEWS_LIST_PAGE);
 				} else {
 					response.sendRedirect(JspPageName.ERROR_PAGE);
 				}

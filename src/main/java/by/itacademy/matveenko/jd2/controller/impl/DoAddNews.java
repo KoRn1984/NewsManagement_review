@@ -31,7 +31,6 @@ public class DoAddNews implements Command {
 		    String title = request.getParameter(NewsParameterName.JSP_TITLE_NEWS);
 			String brief = request.getParameter(NewsParameterName.JSP_BRIEF_NEWS);
 			String content = request.getParameter(NewsParameterName.JSP_CONTENT_NEWS);
-			String local = request.getParameter(AttributsName.LOCAL);
 			HttpSession getSession = request.getSession(true);
 						
 			var user = (User) getSession.getAttribute(AttributsName.USER);
@@ -45,21 +44,16 @@ public class DoAddNews implements Command {
 			try {				
 				if (newsService.save(news)) {					
 					getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);
-					getSession.setAttribute(AttributsName.ADD_NEWS, AttributsName.COMMAND_EXECUTED);
-					StringBuilder urlForRedirect = new StringBuilder(PageUrl.NEWS_LIST_PAGE);
-					urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
-					urlForRedirect.append(local);
-					response.sendRedirect(urlForRedirect.toString());
+					getSession.setAttribute(AttributsName.ADD_NEWS, AttributsName.COMMAND_EXECUTED);					
+					response.sendRedirect(PageUrl.NEWS_LIST_PAGE);
 				} else {
 					response.sendRedirect(JspPageName.ERROR_PAGE);
 				}
 			} catch (ServiceException e) {
 				log.error(e);
 				StringBuilder urlForRedirect = new StringBuilder(PageUrl.ADD_NEWS_PAGE);
-				urlForRedirect.append(ERROR_ADD_NEWS_MESSAGE);
-				urlForRedirect.append(PageUrl.AMPERSAND_LOCAL);
-				urlForRedirect.append(local);
-				response.sendRedirect(urlForRedirect.toString());				
+				urlForRedirect.append(ERROR_ADD_NEWS_MESSAGE);				
+				response.sendRedirect(urlForRedirect.toString());		
 			}
 	}
 }

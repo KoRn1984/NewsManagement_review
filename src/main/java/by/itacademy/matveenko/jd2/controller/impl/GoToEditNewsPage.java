@@ -26,17 +26,15 @@ public class GoToEditNewsPage implements Command {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter(AttributsName.LOCAL);
+		HttpSession getSession = request.getSession(true);
 		News news = null;
-		try {
-			HttpSession getSession = request.getSession(true);
-			getSession.setAttribute(AttributsName.LOCAL, local);			
+		
+		try {			
 			String id = request.getParameter(NewsParameterName.JSP_ID_NEWS);
 			news = newsService.findById(Integer.parseInt(id));
 			if (news == null) {
 				response.sendRedirect(JspPageName.ERROR_PAGE);
-			} else {
-				
+			} else {				
 				request.setAttribute(AttributsName.NEWS, news);
 				getSession.setAttribute(AttributsName.USER_STATUS, ConnectorStatus.ACTIVE);
 				getSession.setAttribute(AttributsName.NEWS_COMMANDS_NAME, AttributsName.EDIT_NEWS);

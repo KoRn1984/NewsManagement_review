@@ -28,11 +28,10 @@ public class GoToBasePage implements Command{
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter(AttributsName.LOCAL);
-		List<News> latestNews;
 		HttpSession getSession = request.getSession(true);
+		List<News> latestNews;
+				
 		try {			
-			getSession.setAttribute(AttributsName.LOCAL, local);
 			getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.BASE_PAGE);
 			latestNews = newsService.latestList(COUNT_NEWS);			
 			request.setAttribute(AttributsName.NEWS, latestNews);			

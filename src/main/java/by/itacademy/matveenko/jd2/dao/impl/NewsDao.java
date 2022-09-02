@@ -170,7 +170,23 @@ public class NewsDao implements INewsDao {
 		        	}
 			} catch (SQLException | ConnectionPoolException e) {
 				throw new NewsDaoException(e);
-		}
+				}
 		return true;
+	}
+	
+	private static final String SELECT_NEWS_TOTAL_RECORD = "SELECT COUNT(*) AS total FROM news";
+	public static int getTotalRecord() throws NewsDaoException {
+		int total = 0;
+		try (Connection connection = ConnectionPool.getInstance().takeConnection();
+		        PreparedStatement ps = connection.prepareStatement(SELECT_NEWS_TOTAL_RECORD)) {
+				try (ResultSet rs = ps.executeQuery()) {
+					if(rs.next()) {
+	                	total = rs.getInt("total");
+	                	}
+					}
+				} catch (SQLException | ConnectionPoolException e) {
+					throw new NewsDaoException(e);
+					}
+		return total;
 	}
 }

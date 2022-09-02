@@ -26,11 +26,10 @@ public class GoToViewNews implements Command {
 			
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter(AttributsName.LOCAL);
-		News news = null;
 		HttpSession getSession = request.getSession(true);
+		News news = null;
+		
 		try {			
-			getSession.setAttribute(AttributsName.LOCAL, local);
 			String id = request.getParameter(NewsParameterName.JSP_ID_NEWS);
 			news = newsService.findById(Integer.parseInt(id));
 			StringBuilder urlForRedirect = new StringBuilder(PageUrl.VIEW_NEWS);

@@ -16,9 +16,7 @@ public class GoToRegistrationPageCommand implements Command {
 	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String local = request.getParameter(AttributsName.LOCAL);
 		HttpSession getSession = request.getSession(true);
-		getSession.setAttribute(AttributsName.LOCAL, local);
 		getSession.setAttribute(AttributsName.PAGE_URL, PageUrl.REGISTRATION_PAGE);
 		request.setAttribute(AttributsName.SHOW_NEWS, AttributsName.DO_NOT_SHOW_NEWS);
 		getSession.setAttribute(AttributsName.REGISTER_USER, ConnectorStatus.NOT_REGISTERED);

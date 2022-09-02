@@ -47,7 +47,7 @@
 		<label>${content}:<br />
 		<p><textarea type="text" name="content" value="" style="width: 670px; height: 140px;">${news.content}</textarea></p></label>	
 		<br />
-		<c:if test="${not (param.EditNewsError eq null)}">					
+		<c:if test="${not (param.EditNewsError eq null)}">				
 			<font color="red">
 				<c:out value="${edit_news_error}" />
 			</font>
